@@ -1,0 +1,13 @@
+# Dockerfile.inference
+FROM jupyter/scipy-notebook
+
+WORKDIR ./
+
+RUN pip install joblib pandas scikit-learn numpy scipy
+
+COPY test.csv ./test.csv
+COPY inference.py ./inference.py
+COPY Inference_lda.joblib ./Inference_lda.joblib
+COPY Inference_NN.joblib ./Inference_NN.joblib
+
+CMD ["python3", "inference.py"]

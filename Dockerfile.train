@@ -1,0 +1,12 @@
+# Dockerfile.train
+FROM jupyter/scipy-notebook
+
+WORKDIR /mydata
+
+RUN pip install joblib pandas scikit-learn numpy scipy
+
+COPY train.csv ./train.csv
+COPY train.py ./train.py
+
+CMD ["python3", "train.py"]
+

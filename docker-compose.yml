@@ -1,0 +1,26 @@
+version: '3'
+services:
+  training:
+    build:
+      context: .
+      dockerfile: Dockerfile.train
+    volumes:
+      - ./train.csv:/mydata/train.csv
+    networks:
+      - ml-network
+
+  inference:
+    build:
+      context: .
+      dockerfile: Dockerfile.inference
+    volumes:
+      - ./test.csv:/mydata/test.csv
+    depends_on:
+      - training
+    networks:
+      - ml-network
+
+networks:
+  ml-network:
+    driver: bridge
+
